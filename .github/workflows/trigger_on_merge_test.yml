@@ -5,26 +5,30 @@ on:
     branches:
       - 'mps/2020.3'
 jobs:
-  createPR:
+  autoMergeAndCreatePR-2021-1:
     # only trigger if it was actually merged
     if: github.event.pull_request.merged == true
+    
     runs-on: ubuntu-latest
     steps:
 
-      - name: Git Checkout
+      # checkout the target branch
+      - name: Checkout mps/2021.1
         uses: actions/checkout@v3
         with:
           ref: 'mps/2021.1'
           fetch-depth: 0
 
-      - run:  echo LOL   ${{ github.event }}
-      - run:  echo title  ${{ github.event.pull_request.title }}
-      - run:  echo body   ${{ github.event.pull_request.body }}
-      - run:  echo user   ${{ github.event.pull_request.user }}
-      - run:  echo ulog   ${{ github.event.pull_request.user.login }}
+      - run:  echo LOL   mps/2021.1/${{ github.event.pull_request.base.ref }}
+#       - run:  echo title  ${{ github.event.pull_request.title }}
+#       - run:  echo body   ${{ github.event.pull_request.body }}
+#       - run:  echo user   ${{ github.event.pull_request.user }}
+#       - run:  echo ulog   ${{ github.event.pull_request.user.login }}
       
+      # actually merge from the previous branch
       - run: git merge origin/mps/2020.3 --
       
+      # create a PR based on the merge
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
         with:
