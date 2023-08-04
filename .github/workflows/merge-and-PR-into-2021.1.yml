@@ -18,9 +18,7 @@ jobs:
         with:
           ref: 'mps/2021.1'
           fetch-depth: 0
-        
-      - run: echo [Original PR:](${{ github.event._links.html.href }})
-      
+            
       # actually merge from the previous branch
       - run: |
          git config user.name 'github-actions[bot]'
