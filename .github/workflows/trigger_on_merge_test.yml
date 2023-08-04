@@ -24,10 +24,10 @@ jobs:
 #          git merge mps/2020.3 --
 #          git push
       - run:  echo LOL   ${{ github.event }}
-      - run:  echo LOL2  ${{ github.event.pull_request.title }}
-      - run:  echo LOL3  ${{ github.event.pull_request.body }}
-      - run:  echo LOL3  ${{ github.event.pull_request.author }}
-      - run:  echo LOL4  ${{ github.event.message }}
+      - run:  echo title  ${{ github.event.pull_request.title }}
+      - run:  echo body   ${{ github.event.pull_request.body }}
+      - run:  echo user   ${{ github.event.pull_request.user }}
+      - run:  echo ulog   ${{ github.event.pull_request.user.login }}
       
       - run: git merge origin/mps/2020.3 --
       
