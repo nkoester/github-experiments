@@ -16,13 +16,7 @@ jobs:
         with:
           ref: 'mps/2021.1'
           fetch-depth: 0
-#      - run: |
-#          echo The PR was merged ${{ github.event }} - ${{ github.event.commits[0].message }}
 
-#      - run: |
-#          git switch mps/2021.1
-#          git merge mps/2020.3 --
-#          git push
       - run:  echo LOL   ${{ github.event }}
       - run:  echo title  ${{ github.event.pull_request.title }}
       - run:  echo body   ${{ github.event.pull_request.body }}
@@ -34,8 +28,12 @@ jobs:
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: update authors
-          title: ${{ github.event.pull_request.title }} (2020.3->2021.1)
-          body: This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`
-          branch: 'mps/2021.1/TODO'
-#          branch: 'auto-pr/testing ${{ github.event.head_commit.message }}'
+          commit-message: Automatically merge mps/2020.3 into mps/2021.1
+          title: ${{ github.event.pull_request.title }} (2020.3 -> 2021.1)
+          body: |
+            This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`
+            
+            [Original PR:](${{ github.event.pull_request.url }})
+            
+            ${{ github.event.pull_request.body }}
+          branch: 'mps/2021.1/${{ github.event.pull_request.base.ref }}'
