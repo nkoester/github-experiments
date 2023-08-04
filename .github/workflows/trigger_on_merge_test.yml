@@ -23,7 +23,11 @@ jobs:
 #          git switch mps/2021.1
 #          git merge mps/2020.3 --
 #          git push
-      - run: git branch -a
+      - run:  echo LOL   ${{ github.event }}
+      - run:  echo LOL2  ${{ github.event.commits }}
+      - run:  echo LOL3  ${{ github.event.pull_request }}
+      - run:  echo LOL3  ${{ github.event.commits[0] }}
+      - run:  echo LOL4  ${{ github.event.message }}
       
       - run: git merge origin/mps/2020.3 --
       
@@ -33,6 +37,5 @@ jobs:
           commit-message: update authors
           title: Merge 2020.3 into 2021.1 (autoPR)
           body: This is an automatic PR which merges changes from mps/2020.3 to mps/2021.1
-          branch: 'auto-pr/testing'
+          branch: 'mps/2021.1/TODO'
 #          branch: 'auto-pr/testing ${{ github.event.head_commit.message }}'
-          delete-branch: true
