@@ -18,12 +18,11 @@ jobs:
         with:
           ref: 'mps/2021.1'
           fetch-depth: 0
-
-      - run:  echo LOL   mps/2021.1/${{ github.event.pull_request.base.ref }}
-#       - run:  echo title  ${{ github.event.pull_request.title }}
-#       - run:  echo body   ${{ github.event.pull_request.body }}
-#       - run:  echo user   ${{ github.event.pull_request.user }}
-#       - run:  echo ulog   ${{ github.event.pull_request.user.login }}
+          
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       
       # actually merge from the previous branch
       - run: git merge origin/mps/2020.3 --
