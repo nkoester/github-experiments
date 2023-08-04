@@ -1,3 +1,4 @@
+name: Merge and PR into 2021.2
 on:
   pull_request_target:
     types:
