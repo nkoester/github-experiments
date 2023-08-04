@@ -4,15 +4,19 @@ on:
       - closed
     branches:
       - 'mps/2020.3'
+      
 jobs:
   createPR:
     # only trigger if it was actually merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: echo The PR was merged ${{ github.event }} - ${{ github.event.commits }}
-      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - name: Git Checkout
+        uses: actions/checkout@v3
+        
+      - name: print
+        run: echo The PR was merged ${{ github.event }} - ${{ github.event.commits }}
+
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
         with:
