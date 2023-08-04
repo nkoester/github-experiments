@@ -5,7 +5,7 @@ on:
     branches:
       - 'mps/2020.3'
 jobs:
-  autoMergeAndCreatePR-2021-1:
+  merge-and-PR-in-2021-1:
     # only trigger if it was actually merged
     if: github.event.pull_request.merged == true
     
@@ -35,6 +35,6 @@ jobs:
           body: |
             This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`
             
-            [Original PR:](${{ github.event._links.html.href }})
+            [Original PR:](${{ github.event.pull_request._links.html.href }})
             
             ${{ github.event.pull_request.body }}
