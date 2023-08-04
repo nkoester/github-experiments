@@ -1,0 +1,23 @@
+on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'main'
+jobs:
+  createPR:
+    # only trigger if it was actually merged
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo The PR was merged ${{ github.event.head_commit.message }}
+#      - name: Create PR for MPS 2021.1
+#        uses: peter-evans/create-pull-request@v5
+#        with:
+#          base: 'mps/2020.3'
+#          commit-message: update authors
+#          title: Update AUTHORS
+#          body: Credit new contributors by updating AUTHORS
+#          branch: 'auto-pr/${{ github.event.head_commit.message }}'
+#          delete-branch: true
