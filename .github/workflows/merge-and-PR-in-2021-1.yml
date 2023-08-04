@@ -25,17 +25,17 @@ jobs:
          git config user.name 'github-actions[bot]'
          git config user.email 'github-actions[bot]@users.noreply.github.com'
          git merge origin/mps/2020.3 --
-      
+        
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: 'autoPR/mps/2021.1/${{ github.head_ref }}'
+          # branch: 'autoPR/mps/2021.1/${{ github.head_ref }}'
           commit-message: Merge mps/2020.3 into mps/2021.1
           title: ${{ github.event.pull_request.title }} (2020.3 -> 2021.1)
           body: |
             This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`
             
-            [Original PR:](${{ github.event.pull_request._links.html.href }})
+            [Original PR content on `mps/2020.3`:](${{ github.event.pull_request._links.html.href }})
             
-            ${{ github.event.pull_request.body }}
+            > ${{ github.event.pull_request.body }}
