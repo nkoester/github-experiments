@@ -11,11 +11,13 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - run: ls -la
       - name: Git Checkout
         uses: actions/checkout@v3
         
-      - name: print
-        run: echo The PR was merged ${{ github.event }} - ${{ github.event.commits }}
+      #- name: print
+      #  run: echo The PR was merged ${{ github.event }} - ${{ github.event.commits }}
+      - run: ls -la
 
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
