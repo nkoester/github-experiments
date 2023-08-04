@@ -35,6 +35,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           #branch: 'autoPR/mps/2021.1/${{ github.head_ref }}'
+          branch: 'mergePR/mps/2021.2'
           commit-message: Merge mps/2021.1 into mps/2021.2
           title: ${{ env.TOXENV }} (2021.1 -> 2021.2)
           body: |
