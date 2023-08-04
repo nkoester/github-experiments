@@ -38,7 +38,7 @@ jobs:
           #branch: 'autoPR/mps/2021.1/${{ github.head_ref }}'
           branch: 'mergePR/mps/2021.2'
           commit-message: Merge mps/2021.1 into mps/2021.2
-          title: ${{ env.TOXENV }} (2021.1 -> 2021.2)
+          title: ${{ env.NEW_TITLE }} (2021.1 -> 2021.2)
           body: |
             This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`
             
