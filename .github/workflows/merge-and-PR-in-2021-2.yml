@@ -1,0 +1,40 @@
+on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'mps/2021.1'
+jobs:
+  merge-and-PR-in-2021-1:
+    # only trigger if it was actually merged
+    if: github.event.pull_request.merged == true
+    
+    runs-on: ubuntu-latest
+    steps:
+
+      # checkout the target branch
+      - name: Checkout mps/2021.1
+        uses: actions/checkout@v3
+        with:
+          ref: 'mps/2021.2'
+          fetch-depth: 0
+            
+      # actually merge from the previous branch
+      - run: |
+         git config user.name 'github-actions[bot]'
+         git config user.email 'github-actions[bot]@users.noreply.github.com'
+         git merge origin/mps/2021.1 --
+      
+      # create a PR based on the merge
+      - name: Create PR for MPS 2021.2
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: 'autoPR/mps/2021.1/${{ github.head_ref }}'
+          commit-message: Merge mps/2021.1 into mps/2021.2
+          title: ${{ github.event.pull_request.title }} (2021.1 -> 2021.2)
+          body: |
+            This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`
+            
+            [Original PR:](${{ github.event.pull_request._links.html.href }})
+            
+            ${{ github.event.pull_request.body }}
