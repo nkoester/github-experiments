@@ -10,17 +10,18 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo The PR was merged ${{ github.event }} - ${{ github.event.commits[0].message }}
+      - uses: actions/checkout@v3
+      - run: echo The PR was merged ${{ github.event }} - ${{ github.event.commits }}
       - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
         with:
-#          base: 'mps/2020.3'
-          base: 'mps/2021.1'
+          base: 'mps/2020.3'
           commit-message: update authors
           title: Merge 2020.3 into 2021.1 (autoPR)
-          body: This is an automatic PR which merges changes from mps/2020.3 to mps/2021.1
+          body: |
+              - Merges changes from mps/2020.3 to mps/2021.1
+                This is an automaticly generated PR
           branch: 'auto-pr/testing'
 #          branch: 'auto-pr/testing ${{ github.event.head_commit.message }}'
           delete-branch: true
