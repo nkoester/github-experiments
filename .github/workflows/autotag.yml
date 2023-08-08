@@ -21,13 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          ref: '${{ github.ref_name }}'
+          
       - name: Set Tag
         run: |
           echo "pref $(echo ${{ github.ref_name }} | sed 's/mps\///g')"
           export lastVersion=$(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/2020.3.//g')
           git tag
-          echo "lass $(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/2020.3.//g'))
+          echo "lass $(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/2020.3.//g'))"
           echo "last $lastVersion"
           echo "next $((lastVersion+1))"
           
