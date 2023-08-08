@@ -29,7 +29,7 @@ jobs:
                     
           PR_CONTENT="${{ github.event.pull_request.body }}"
           PR_CONTENT="$(echo $PR_CONTENT | sed 's/^/>/g')"
-          echo "PR_CONTENT=PR_CONTENT" >> $GITHUB_ENV
+          echo "PR_CONTENT=$PR_CONTENT" >> $GITHUB_ENV
 
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
