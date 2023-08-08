@@ -2,6 +2,10 @@
 just some random experiments with ghithub, github action and packages
 
 
+this branch has version
+2021.1
+
+
 ## Automatically generated draw.io images
 
 [<img src="doc/drawio-assets/generation_test-Page-1.png" width=45% >](doc/drawio-assets/generation_test-Page-1.png)
