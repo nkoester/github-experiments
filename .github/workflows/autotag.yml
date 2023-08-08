@@ -23,12 +23,16 @@ jobs:
           
       - name: Set Tag
         run: |
-          export versionPrefix=$(echo ${{ github.ref_name }} | sed 's/mps\///g')
-          export lastVersion=$(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/2020.3.//g')
-          export nextVersion=$((lastVersion+1))
-          
-          # sanity check
-          [[ -z "${versionPrefix}" || -z "${lastVersion}" || -z "${nextVersion}"  ]] && echo "Abort due to empty Variable: '${versionPrefix} | ${lastVersion} | ${nextVersion}" && exit -1
-
-          git tag "${versionPrefix}.${nextVersion}"
-          git push origin "${versionPrefix}.${nextVersion}"
+          for versionPrefix in 2020.3 2021.1 2021.2 2021.3 2022.1
+          do
+            #export versionPrefix=$(echo ${{ version }} | sed 's/mps\///g')
+            export lastVersion=$(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/${versionPrefix}.//g')
+            export nextVersion=$((lastVersion+1))
+            
+            # sanity check
+            [[ -z "${lastVersion}" || -z "${nextVersion}"  ]] && echo "Abort due to empty Variable: '${lastVersion} | ${nextVersion}" && exit -1
+  
+            git tag "${versionPrefix}.${nextVersion}"
+            #git push origin "${versionPrefix}.${nextVersion}"
+          done
+          git push --tags
