@@ -13,6 +13,7 @@
 
 export previousNextVersion=0
 for versionPrefix in "2020.3" "2021.1" "2021.2" "2021.3" "2022.2"; do
+    git switch "mps/${versionPrefix}"
 
     #calculate the next version number
     lastVersion=$(git tag | grep "^${versionPrefix}\.[0-9]*$" | sort -V | tail -n1 | cut -d . -f 3)
