@@ -1,20 +1,15 @@
 name: TagNewVersion
 
 on:
-  pull_request_target:
-    types:
-      - closed
-    branches:
-      - 'mps/20**'
-
+  workflow_run:
+    workflows: [Merge and PR into 2022.2]
+    types: [completed]
+    
   # allow manual execution just in case
   workflow_dispatch:
 
 jobs:
   tagBranch:
-    # only trigger if it was actually merged
-    #if: github.event.pull_request.merged == true
-
     permissions:
       contents: write
 
