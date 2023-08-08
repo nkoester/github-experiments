@@ -1,0 +1,24 @@
+name: TagNewVersion
+
+on:
+  workflow_run:
+    workflows: [Merge and PR into 2022.2]
+    types: [completed]
+    
+  # allow manual execution just in case
+  workflow_dispatch:
+
+jobs:
+  tagBranch:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: '${{ github.ref_name }}'
+          fetch-depth: 0
+          
+      - name: Set Tags
+        run: .github/workflows/tagAllBranchesWithIncrementedVersion.sh
