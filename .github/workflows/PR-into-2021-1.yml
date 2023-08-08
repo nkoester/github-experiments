@@ -26,9 +26,9 @@ jobs:
          git config user.name 'github-actions[bot]'
          git config user.email 'github-actions[bot]@users.noreply.github.com'
          git merge origin/mps/2020.3 --
-         export PR_CONTENT=$(echo ${{ github.event.pull_request.body }} | sed 's/^/>/g')
-         echo "::set-env name=PR_CONTENT::PR_CONTENT"
-        
+           
+         echo "PR_CONTENT=$(echo ${{ github.event.pull_request.body }} | sed 's/^/>/g')"  >> $GITHUB_ENV
+
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
@@ -41,5 +41,4 @@ jobs:
             
             [Original PR content on `mps/2020.3`:](${{ github.event.pull_request._links.html.href }})
             
-            ${PR_CONTENT}
-            
+            ${{ env.PR_CONTENT }}
