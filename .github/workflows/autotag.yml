@@ -24,8 +24,8 @@ jobs:
 
       - name: Set Tag
         run: |
-          echo ${{ github.ref_name }}
+          echo "pref $(${{ github.ref_name }} | sed 's/mps\///g')"
           export lastVersion=$(git tag | grep "^2020\.3\.[0-9]*$" | sort -V | tail -n1 | sed 's/2020.3.//g')
-          echo lastVersion
-          echo $((lastVersion+1))
+          echo "last $lastVersion"
+          echo "next $((lastVersion+1))"
           
