@@ -1,4 +1,5 @@
 name: TagNewVersion
+run-name: Tag All Branches With New Version
 
 on:
   pull_request_target:
