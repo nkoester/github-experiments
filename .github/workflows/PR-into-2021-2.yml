@@ -26,7 +26,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git merge origin/mps/2021.1 --
+          git merge --no-commit --no-ff origin/mps/2021.1 -- 
+          git commit -m "Automatic merge 2021.1 -> 2021.2"
+          
           
           # strip title of previous version suffix
           NEW_TITLE="${{ github.event.pull_request.title }}"
@@ -42,7 +44,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           branch: 'autoPR/mps/2021.2'
-          commit-message: Merge mps/2021.1 into mps/2021.2
+          commit-message: PR 2021.1 -> mps/2021.2
           title: ${{ env.NEW_TITLE }} (2021.1 -> 2021.2)
           body: |
             This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`

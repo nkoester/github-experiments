@@ -26,7 +26,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git merge origin/mps/2021.2 --
+          git merge --no-commit --no-ff origin/mps/2021.2 -- 
+          git commit -m "Automatic merge 2021.2 -> 2021.3"
           
           # strip title of previous version suffix
           NEW_TITLE="${{ github.event.pull_request.title }}"
