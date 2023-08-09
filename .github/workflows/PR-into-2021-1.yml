@@ -31,7 +31,7 @@ jobs:
           # actual merge operation
           git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 --
 
-          NEW_TITLE=$(echo \"${{ github.event.pull_request.title }}\")
+          NEW_TITLE=$(echo "${{ github.event.pull_request.title }}")
           
 
 
