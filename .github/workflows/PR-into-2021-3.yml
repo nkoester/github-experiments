@@ -1,5 +1,5 @@
 name: Merge and PR into 2021.3
-run-name: 2021.2 -> 2021.3 (createPR)
+run-name: Automatic Merge 2021.2 -> 2021.3
 on:
   pull_request_target:
     types:
@@ -24,29 +24,21 @@ jobs:
       # actually merge from the previous branch
       - name: Perform merge from 2021.2 to 2021.3
         run: |
+          # setup to allow to merge and commit
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git merge --no-commit --no-ff origin/mps/2021.2 -- 
-          git commit -m "Automatic merge 2021.2 -> 2021.3"
           
-          # strip title of previous version suffix
-          NEW_TITLE="${{ github.event.pull_request.title }}"
-          NEW_TITLE="${NEW_TITLE// (2021.1 -> 2021.2)}"
-          echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
-          
-          PR_CONTENT="${{ github.event.pull_request.body }}"
-          PR_CONTENT="$(echo $PR_CONTENT | sed 's/^/>/g')"
-          echo "PR_CONTENT=$PR_CONTENT" >> $GITHUB_ENV
+          # actual merge operation
+          git merge --no-ff --message "Merge 2021.2 -> 2021.3" origin/mps/2021.2 --
 
       # create a PR based on the merge
       - name: Create PR for MPS 2021.3
         uses: peter-evans/create-pull-request@v5
         with:
-          branch: 'autoPR/mps/2021.3'
+          branch: 'merge/2021.3'
           commit-message: Merge mps/2021.2 into mps/2021.3
-          title: ${{ env.NEW_TITLE }} (2021.2 -> 2021.3)
+          title: ${{ github.event.pull_request.title }} -> 2021.3
           body: |
             This is an automatic PR which merges changes from `mps/2021.2` to `mps/2021.3`
             
-            [Original PR content on `mps/2021.2`:](${{ github.event.pull_request._links.html.href }})
-            ${{ env.PR_CONTENT }}
+            [Link to original PR for `mps/2020.3`](${{ github.event.pull_request._links.html.href }})
