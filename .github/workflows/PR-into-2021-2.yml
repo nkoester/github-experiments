@@ -24,6 +24,11 @@ jobs:
       # actually merge from the previous branch
       - name: Perform merge from 2021.1 to 2021.2
         run: |
+          # strip the title of previous automatic PR content
+          NEW_TITLE='${{ github.event.pull_request.title }}'
+          NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
+          echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
+          
           # setup to allow to merge and commit
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -37,7 +42,7 @@ jobs:
         with:
           branch: 'merge/2021.2'
           commit-message: Merge mps/2021.1 into mps/2021.2
-          title: ${{ github.event.pull_request.title }} -> 2021.2
+          title: ${{ env.NEW_TITLE }} (2021.1 -> 2021.2)
           body: |
             This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`.
             
