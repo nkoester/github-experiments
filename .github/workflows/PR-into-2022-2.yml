@@ -1,4 +1,5 @@
 name: Merge and PR into 2022.2
+run-name: 2021.3 -> 2022.2 (createPR)
 on:
   pull_request_target:
     types:
