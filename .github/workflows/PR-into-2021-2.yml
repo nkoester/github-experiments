@@ -33,7 +33,9 @@ jobs:
           git commit -m "Automatic merge 2021.1 -> 2021.2"
                     
           # strip title of previous version suffix
-          NEW_TITLE="${{ github.event.pull_request.title }}"
+          echo NEW_TITLE<<EOF
+          ${{ github.event.pull_request.title }}
+          echo EOF
           NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
           echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
 
