@@ -33,6 +33,12 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           
+          #  TMP DEL ME strip title of previous version suffix
+          NEW_TITLE="${{ github.event.pull_request.title }}"
+          #NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
+          echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
+          
+          
           # actual merge operation
           git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 --
 #          git merge --no-commit --no-ff origin/mps/2020.3 --
