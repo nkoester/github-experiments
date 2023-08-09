@@ -36,6 +36,10 @@ jobs:
           # actual merge operation
           git merge --no-ff --message "Merge 2021.1 -> 2021.2" origin/mps/2021.1 --
 
+          PR_CONTENT='${{ github.event.pull_request.body }}'
+          PR_CONTENT="$(echo $PR_CONTENT | tail -n +2 | sed 's/^/>/g')"
+          echo "PR_CONTENT=$PR_CONTENT" >> $GITHUB_ENV
+
       # create a PR based on the merge
       - name: Create PR for MPS 2021.2
         uses: peter-evans/create-pull-request@v5
@@ -46,4 +50,5 @@ jobs:
           body: |
             This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`.
             
-            [Link to original PR for `mps/2021.1`](${{ github.event.pull_request._links.html.href }})
+            [Link to previous PR for `mps/2021.1`](${{ github.event.pull_request._links.html.href }})
+            ${{ env.PR_CONTENT }}
