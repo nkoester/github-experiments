@@ -24,19 +24,12 @@ jobs:
       # actually merge from the previous branch
       - name: Perform merge from 2020.3 to 2021.1
         run: |
-          # prepare content for the PR in the next step
-          PR_CONTENT="${{ github.event.pull_request.body }}"
-          PR_CONTENT="$(echo $PR_CONTENT | sed 's/^/>/g')"
-          echo "PR_CONTENT=$PR_CONTENT" >> $GITHUB_ENV
-          
           # setup to allow to merge and commit
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          
+                              
           # actual merge operation
           git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 --
-#          git merge --no-commit --no-ff origin/mps/2020.3 --
-#          git commit -m "Automatic merge 2020.3 -> 2021.1"
 
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
