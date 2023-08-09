@@ -37,7 +37,7 @@ jobs:
         with:
           branch: 'merge/2021.1'
           commit-message: Merge mps/2020.3 into mps/2021.1
-          title: ${{ github.event.pull_request.title }} -> 2021.1
+          title: ${{ github.event.pull_request.title }} (2020.3 -> 2021.1)
           body: |
             This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`.
             
