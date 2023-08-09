@@ -1,5 +1,5 @@
 name: Merge and PR into 2021.3
-run-name: Automatic Merge 2021.2 -> 2021.3
+run-name: Merge 2021.2 -> 2021.3
 on:
   pull_request_target:
     types:
