@@ -34,11 +34,12 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           
           #  TMP DEL ME strip title of previous version suffix
-          NEW_TITLE="${{ github.event.pull_request.title }}"
+          echo NEW_TITLE<<EOF
+          ${{ github.event.pull_request.title }}
+          echo EOF
           #NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
           echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
-          
-          
+                    
           # actual merge operation
           git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 --
 #          git merge --no-commit --no-ff origin/mps/2020.3 --
@@ -50,7 +51,7 @@ jobs:
         with:
           branch: 'merge/2021.1'
           commit-message: Merge mps/2020.3 into mps/2021.1
-          title: ${{ github.event.pull_request.title }} (2020.3 -> 2021.1)
+          title: ${{ env.NEW_TITLE }} (2020.3 -> 2021.1)
           body: |
             This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`.
             
