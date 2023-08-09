@@ -30,8 +30,11 @@ jobs:
          # strip title of previous version suffix
          NEW_TITLE="${{ github.event.pull_request.title }}"
          NEW_TITLE="${NEW_TITLE// (2021.2 -> 2021.3)}"
-         echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
-      
+
+         PR_CONTENT="${{ github.event.pull_request.body }}"
+         PR_CONTENT="$(echo $PR_CONTENT | sed 's/^/>/g')"
+         echo "PR_CONTENT=$PR_CONTENT" >> $GITHUB_ENV
+
       # create a PR based on the merge
       - name: Create PR for MPS 2022.2
         uses: peter-evans/create-pull-request@v5
@@ -43,5 +46,4 @@ jobs:
             This is an automatic PR which merges changes from `mps/2021.3` to `mps/2022.2`
             
             [Original PR content on `mps/2021.3`:](${{ github.event.pull_request._links.html.href }})
-            
-            > ${{ github.event.pull_request.body }}
+            ${{ env.PR_CONTENT }}
