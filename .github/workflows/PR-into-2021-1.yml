@@ -41,4 +41,4 @@ jobs:
           body: |
             This is an automatic PR which merges changes from `mps/2020.3` to `mps/2021.1`.
             
-            [Link to original PR for `mps/2020.3`](${{ github.event.pull_request._links.html.href }})
+            [Link to previous PR for `mps/2020.3`](${{ github.event.pull_request._links.html.href }})
