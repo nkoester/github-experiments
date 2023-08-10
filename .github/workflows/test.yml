@@ -1,0 +1,21 @@
+name: Test Workflow
+run-name: Test Workfloww ${{ github.event.create.ref }}
+
+on:
+  # run on tagging
+  push:
+    tags:
+      - '**'
+
+  # allow manual execution just in case
+  workflow_dispatch:
+
+jobs:
+  testWorkflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use tag as version
+        run: |
+          echo ${{ github.event.ref }}
+          echo "${GITHUB_REF#refs/*/}"
+        
