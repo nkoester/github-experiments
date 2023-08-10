@@ -5,7 +5,7 @@ on:
   # run on tagging
   push:
     tags:
-      - '**'
+      - 'test/**'
 
   # allow manual execution just in case
   workflow_dispatch:
@@ -19,3 +19,6 @@ jobs:
           echo ${{ github.event.ref }}
           echo "${GITHUB_REF#refs/*/}"
           echo "github.event.create.ref ${{ github.event.create.ref }}"
+          echo "github.event ${{ github.event }}"
+          echo  GITHUB_CONTEXT 
+          echo "$GITHUB_CONTEXT"
