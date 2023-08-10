@@ -29,8 +29,13 @@ jobs:
           git config user.email 'github-actions[bot]@users.noreply.github.com'
                               
           # actual merge operation
-          git merge --no-ff --message "Merge 2020.3 -> 2021.1" origin/mps/2020.3 --
-
+          git merge --no-ff origin/mps/2020.3 --
+          git checkout --ours -- conflictTest.file
+          git add conflictTest.file
+          git status
+          git add -u
+          git commit --message "Merge 2020.3 -> 2021.1"
+          
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
         uses: peter-evans/create-pull-request@v5
