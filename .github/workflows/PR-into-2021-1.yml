@@ -34,7 +34,7 @@ jobs:
           git add conflictTest.file
           git status
           git add -u
-          git commit --message "Merge 2020.3 -> 2021.1"
+          git commit --message "Merge 2020.3 -> 2021.1" || true
           
       # create a PR based on the merge
       - name: Create PR for MPS 2021.1
