@@ -43,7 +43,7 @@ jobs:
       - name: Create PR for MPS 2022.2
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MPS_REPO_PAT }}
           branch: 'merge/2022.2'
           commit-message: Merge mps/2022.3 into mps/2022.2
           title: ${{ env.NEW_TITLE }} (2021.3 -> 2022.2)
