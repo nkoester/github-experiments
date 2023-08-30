@@ -10,7 +10,7 @@ jobs:
   merge-and-PR-into-2021-2:
     # only trigger if it was actually merged
     if: github.event.pull_request.merged == true
-    
+
     runs-on: ubuntu-latest
     steps:
 
@@ -20,14 +20,14 @@ jobs:
         with:
           ref: 'mps/2021.2'
           fetch-depth: 0
-            
+
       # actually merge from the previous branch
       - name: Perform merge from 2021.1 to 2021.2
         run: |
           # setup to allow to merge and commit
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          
+
           # actual merge operation
           git merge --no-ff --message "Merge 2021.1 -> 2021.2" origin/mps/2021.1 --
 
@@ -38,15 +38,16 @@ jobs:
           NEW_TITLE='${{ github.event.pull_request.title }}'
           NEW_TITLE="${NEW_TITLE// (2020.3 -> 2021.1)}"
           echo "NEW_TITLE=$NEW_TITLE" >> $GITHUB_ENV
-          
+
       # create a PR based on the merge
       - name: Create PR for MPS 2021.2
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'merge/2021.2'
           commit-message: Merge mps/2021.1 into mps/2021.2
           title: ${{ env.NEW_TITLE }} (2021.1 -> 2021.2)
           body: |
             This is an automatic PR which merges changes from `mps/2021.1` to `mps/2021.2`.
-            
+
             [Link to previous PR for `mps/2021.1`](${{ github.event.pull_request._links.html.href }})
