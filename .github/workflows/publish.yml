@@ -1,0 +1,22 @@
+name: Publish
+run-name: Publish
+
+on:
+  # release on tagging
+  push:
+    tags:
+      - 'testprefix**'
+
+  # allow manual execution just in case
+  workflow_dispatch:
+
+jobs:
+  newRelease:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 
+      - name: something
+        run: ls -lah && echo "done"
+   
