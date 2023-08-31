@@ -32,4 +32,6 @@ jobs:
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
       - name: Tag branches
+        env:
+          MPS_REPO_PAT: ${{ secrets.MPS_REPO_PAT }}
         run: .github/workflows/tagAllBranchesWithIncrementedVersion.sh
