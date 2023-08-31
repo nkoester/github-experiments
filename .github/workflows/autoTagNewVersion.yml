@@ -26,12 +26,9 @@ jobs:
         if: ( startsWith(github.ref, 'refs/heads/mps/202') == false )
         run: echo ${{ github.event_name }} && exit -1
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{secrets.MPS_REPO_PAT}}
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
-          persist-credentials: 'false'
-          
-      - name: Set Tags
         run: .github/workflows/tagAllBranchesWithIncrementedVersion.sh
