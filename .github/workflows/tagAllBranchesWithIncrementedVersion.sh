@@ -36,7 +36,7 @@ for versionPrefix in "2020.3" "2021.1" "2021.2" "2021.3" "2022.2"; do
 done
 
 ##
-git remote add origin2 https://${{secrets.MPS_REPO_PAT}}@github.com/nkoester/github-experiments.git
+#git remote add origin2 https://${{secrets.MPS_REPO_PAT}}@github.com/nkoester/github-experiments.git
 
 # pushing the tags will trigger the release for each branch
-git push --tags origin2
+git push --tags
