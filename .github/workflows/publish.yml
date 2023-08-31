@@ -16,7 +16,9 @@ jobs:
     steps:
       - name: Exit if not on mps branch
         if: startsWith(github.ref, 'mps/202**') == false
-        run: echo ${{ gitub.ref }} && exit -1
+        run: |
+          echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          exit -1
       - uses: actions/checkout@v2 
       - name: something
         run: ls -lah && echo "done"
