@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Exit if not on mps branch
-        if: startsWith(github.ref, 'mps/202') == false
+        if: startsWith("${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}", 'mps/202') == false
         run: |
           echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
           exit -1
