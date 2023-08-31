@@ -5,7 +5,7 @@ on:
   # release on tagging
   push:
     tags:
-      - 'test**'
+      - '202**'
 
   # allow manual execution just in case
   workflow_dispatch:
