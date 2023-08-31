@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Exit if not on MPS branch (mps/202**)
-        if: ( startsWith(github.ref, 'refs/heads/mps/202') == false || github.event_name == 'workflow_dispatch' )
+        if: ( startsWith(github.ref, 'refs/heads/mps/202') == false )
         run: echo ${{ github.event_name }} && exit -1
 
       - uses: actions/checkout@v2
