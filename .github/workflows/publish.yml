@@ -5,7 +5,7 @@ on:
   # release on tagging
   push:
     tags:
-      - '**'
+      - 'test**'
 
   # allow manual execution just in case
   workflow_dispatch:
@@ -14,8 +14,8 @@ jobs:
   newRelease:
     runs-on: ubuntu-latest
     steps:
-      - name: Exit if not on master branch
-        if: startsWith(github.ref, 'mps/202') == false
+      - name: Exit if not on mps branch
+        if: startsWith(github.ref, 'mps/202**') == false
         run: exit -1
       - uses: actions/checkout@v2 
       - name: something
