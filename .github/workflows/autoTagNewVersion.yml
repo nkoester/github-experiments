@@ -13,16 +13,22 @@ on:
 
 jobs:
   tagBranch:
+  
     # only trigger if the PR was actually merged
-    if: github.event.pull_request.merged == true
-
+    if: ( github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' )
+    
     permissions:
       contents: write
 
     runs-on: ubuntu-latest
     steps:
+      - name: Exit if not on MPS branch (mps/202**)
+        if: ( startsWith(github.ref, 'refs/heads/mps/202') == false )
+        run: echo ${{ github.event_name }} && exit -1
+
       - uses: actions/checkout@v2
         with:
+          token: ${{secrets.MPS_REPO_PAT}}
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
           
