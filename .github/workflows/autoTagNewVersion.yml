@@ -23,6 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          token: ${{secrets.MPS_REPO_PAT}}
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
           
