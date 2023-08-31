@@ -1,0 +1,26 @@
+name: Publish
+run-name: Publish
+
+on:
+  # release on tagging
+  push:
+    tags:
+      - '202**'
+
+  # allow manual execution just in case
+  workflow_dispatch:
+
+jobs:
+  newRelease:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exit if not on mps branch
+        if: startsWith(github.ref, 'refs/heads/mps/202') == false
+        run: |
+          echo "${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "xxx ${{ github.ref }} "
+          exit -1
+      - uses: actions/checkout@v2 
+      - name: something
+        run: ls -lah && echo "done"
+   
