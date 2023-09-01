@@ -1,5 +1,5 @@
 name: Publish
-run-name: Publish
+run-name: Publish ${{ github.ref }}
 
 on:
   # release on tagging
