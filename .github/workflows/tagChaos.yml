@@ -40,7 +40,7 @@ jobs:
       # actually merge from the previous branch
       - name: calculate number
         run: |
-          lastVersion=$(git tag | grep "^${versionPrefix}\.[0-9]*$" | sort -V | tail -n1 | cut -d . -f 3)
+          lastVersion=$(git tag | grep "^2020.3\.[0-9]*$" | sort -V | tail -n1 | cut -d . -f 3)
           nextVersion=$((lastVersion+1))
           echo "nextVersion=$nextVersion" >> $GITHUB_ENV
           
@@ -50,7 +50,7 @@ jobs:
         with:
           github_token: ${{ secrets.MPS_REPO_PAT }}
           tag_prefix: ""
-          custom_tag: ${{ env.nextVersion }}
+          custom_tag: 2020.3.${{ env.nextVersion }}
           release_branches: mps/2020.3
           
           
