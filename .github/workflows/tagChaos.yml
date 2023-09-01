@@ -1,0 +1,45 @@
+name: tagchaos
+run-name: tagchaos
+
+on:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - 'mps/2022.2'
+
+  # allow manual execution just in case
+  workflow_dispatch:
+
+env:
+   GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}  
+
+   
+jobs:
+  tagchaos:
+  
+    # only trigger if the PR was actually merged
+    if: ( github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' )
+    
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exit if not on MPS branch (mps/202**)
+        if: ( startsWith(github.ref, 'refs/heads/mps/202') == false )
+        run: echo ${{ github.event_name }} && exit -1
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{secrets.MPS_REPO_PAT}}
+          ref: '${{ github.ref_name }}'
+          fetch-depth: 0
+          persist-credentials: 'false'
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.MPS_REPO_PAT }}
+          custom_tag: lolwasgehtab
+          
