@@ -11,6 +11,10 @@ on:
   # allow manual execution just in case
   workflow_dispatch:
 
+env:
+   GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}  
+
+   
 jobs:
   tagBranch:
   
