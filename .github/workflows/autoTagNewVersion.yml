@@ -11,6 +11,10 @@ on:
   # allow manual execution just in case
   workflow_dispatch:
 
+env:
+   GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}  
+
+   
 jobs:
   tagBranch:
   
@@ -26,11 +30,16 @@ jobs:
         if: ( startsWith(github.ref, 'refs/heads/mps/202') == false )
         run: echo ${{ github.event_name }} && exit -1
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{secrets.MPS_REPO_PAT}}
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
-          
-      - name: Set Tags
-        run: .github/workflows/tagAllBranchesWithIncrementedVersion.sh
+          persist-credentials: 'false'
+      - name: Tag branches
+        env:
+          MPS_REPO_PAT: ${{ secrets.MPS_REPO_PAT }}
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          .github/workflows/tagAllBranchesWithIncrementedVersion.sh
