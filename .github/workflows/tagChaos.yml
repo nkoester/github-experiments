@@ -44,8 +44,7 @@ jobs:
           nextVersion=$((lastVersion+1))
           echo "nextVersion=$nextVersion" >> $GITHUB_ENV
           
-      - name: Bump version and push tag
-        id: tag_version
+      - name: Tag 2020.3 with new version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.MPS_REPO_PAT }}
@@ -53,5 +52,26 @@ jobs:
           custom_tag: 2020.3.${{ env.nextVersion }}
           release_branches: mps/2020.3
           
+      - name: Tag 2021.1 with new version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.MPS_REPO_PAT }}
+          tag_prefix: ""
+          custom_tag: 2021.1.${{ env.nextVersion }}
+          release_branches: mps/2021.1
           
-          #, mps/2021.1, mps/2021.2, mps/2021.3
+      - name: Tag 2021.2 with new version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.MPS_REPO_PAT }}
+          tag_prefix: ""
+          custom_tag: 2021.2.${{ env.nextVersion }}
+          release_branches: mps/2021.2
+          
+      - name: Tag 2021.3 with new version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.MPS_REPO_PAT }}
+          tag_prefix: ""
+          custom_tag: 2021.3.${{ env.nextVersion }}
+          release_branches: mps/2021.3
