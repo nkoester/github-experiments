@@ -45,15 +45,12 @@ jobs:
           echo "nextVersion=$nextVersion" >> $GITHUB_ENV
           
       - name: Tag 2020.3 with new version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.MPS_REPO_PAT }}
-          tag_prefix: ""
-          custom_tag: 2020.3.${{ env.nextVersion }}
+        uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+        env:
+          GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}
+          CUSTOM_TAG: 2020.3.${{ env.nextVersion }}
+          DEFAULT_BRANCH: mps/2020.3
 
-      - name: Switch to branch mps/2020.3
-        run: git switch mps/2021.1
-        
       - name: Tag 2021.1 with new version
         uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
         env:
@@ -62,16 +59,16 @@ jobs:
           DEFAULT_BRANCH: mps/2021.1
         
       - name: Tag 2021.2 with new version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.MPS_REPO_PAT }}
-          tag_prefix: ""
-          custom_tag: 2021.2.${{ env.nextVersion }}
+        uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+        env:
+          GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}
+          CUSTOM_TAG: 2021.2.${{ env.nextVersion }}
+          DEFAULT_BRANCH: mps/2021.2
             
       - name: Tag 2021.3 with new version
-        uses: mathieudutour/github-tag-action@v6.1
-        with:
-          github_token: ${{ secrets.MPS_REPO_PAT }}
-          tag_prefix: ""
-          custom_tag: 2021.3.${{ env.nextVersion }}
+        uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+        env:
+            GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}
+            CUSTOM_TAG: 2021.3.${{ env.nextVersion }}
+            DEFAULT_BRANCH: mps/2021.3
           
