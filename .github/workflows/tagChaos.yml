@@ -51,7 +51,10 @@ jobs:
           tag_prefix: ""
           custom_tag: 2020.3.${{ env.nextVersion }}
           release_branches: mps/2020.3
-          
+
+      - name: Switch to branch mps/2020.3
+        run: git switch mps/2020.3
+        
       - name: Tag 2021.1 with new version
         uses: mathieudutour/github-tag-action@v6.1
         with:
