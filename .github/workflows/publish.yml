@@ -1,11 +1,11 @@
 name: Publish
-run-name: Publish ${{ github.ref }}
+run-name: Publish ${{ github.ref_name }}
 
 on:
   # release on tagging
   push:
     tags:
-      - '**'
+      - '202**'
 
   # allow manual execution just in case
   workflow_dispatch:
