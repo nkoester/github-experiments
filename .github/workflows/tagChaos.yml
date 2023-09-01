@@ -60,6 +60,7 @@ jobs:
           github_token: ${{ secrets.MPS_REPO_PAT }}
           tag_prefix: ""
           custom_tag: 2021.1.${{ env.nextVersion }}
+          release_branches: mps/2021.1
   
       - name: Switch to branch mps/2020.2
         run: git switch mps/2021.2
