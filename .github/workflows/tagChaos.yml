@@ -41,5 +41,4 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.MPS_REPO_PAT }}
-          custom_tag: lolwasgehtab
-          
+          release_branches: mps/2020.3, mps/2021.1, mps/2021.2, mps/2021.3
