@@ -10,10 +10,6 @@ on:
 
   # allow manual execution just in case
   workflow_dispatch:
-
-env:
-   GITHUB_TOKEN: ${{ secrets.MPS_REPO_PAT }}  
-
    
 jobs:
   tagchaos:
@@ -35,7 +31,6 @@ jobs:
           token: ${{secrets.MPS_REPO_PAT}}
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
-          persist-credentials: 'false'
           
       # actually merge from the previous branch
       - name: calculate number
