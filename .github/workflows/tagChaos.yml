@@ -36,9 +36,22 @@ jobs:
           ref: '${{ github.ref_name }}'
           fetch-depth: 0
           persist-credentials: 'false'
+          
+      # actually merge from the previous branch
+      - name: calculate number
+        run: |
+          lastVersion=$(git tag | grep "^${versionPrefix}\.[0-9]*$" | sort -V | tail -n1 | cut -d . -f 3)
+          nextVersion=$((lastVersion+1))
+          echo "nextVersion=$nextVersion" >> $GITHUB_ENV
+          
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.MPS_REPO_PAT }}
-          release_branches: mps/2020.3, mps/2021.1, mps/2021.2, mps/2021.3
+          tag_prefix: ""
+          custom_tag: ${{ env.nextVersion }}
+          release_branches: mps/2020.3
+          
+          
+          #, mps/2021.1, mps/2021.2, mps/2021.3
