@@ -14,6 +14,13 @@ jobs:
   testWorkflow:
     runs-on: ubuntu-latest
     steps:
+      - name: Run test
+        run: |
+          TAG=160 \
+          for i in "2020.3" "2021.1" "2021.2" "2021.3";do \
+                  echo "${i}.${TAG}"; \
+                  echo "   ${i}.${TAG}"; \
+                  done
       - name: Use tag as version
         run: |
           echo ${{ github.event.ref }}
